@@ -49,7 +49,7 @@ async function deleteProduct(id) {
 async function getAllProducts() {
    try {
     const allProduct = await Product.find();
-    return (await allProduct).map((product)=>product.toObject());
+    return allProduct.map((product)=>product.toObject());
    } catch (error) {
         console.error('error is : ',error);
         throw new Error('failed to fetch products')

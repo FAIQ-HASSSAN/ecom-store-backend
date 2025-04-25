@@ -7,7 +7,8 @@ const productSchema = new mongoose.Schema({
     discount : Number,
     images : Array(String),
     // foreign key
-    categoryId : {type : Schema.Types.ObjectId, ref: 'categories'}
+    categoryId : {type : Schema.Types.ObjectId, ref: 'categories'},
+    brandId : {type : Schema.Types.ObjectId, ref: 'brands'}
 });
 
 // use for database interation
