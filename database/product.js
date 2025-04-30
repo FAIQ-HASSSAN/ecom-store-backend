@@ -8,7 +8,9 @@ const productSchema = new mongoose.Schema({
     images : Array(String),
     // foreign key
     categoryId : {type : Schema.Types.ObjectId, ref: 'categories'},
-    brandId : {type : Schema.Types.ObjectId, ref: 'brands'}
+    brandId : {type : Schema.Types.ObjectId, ref: 'brands'},
+    isFeatured : Boolean,
+    isNewProducts : Boolean,
 });
 
 // use for database interation

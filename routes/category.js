@@ -5,7 +5,7 @@ import {addCategory , updateCategory , deleteCategory , getAllCategories, getSin
 router.post("",async(req,res)=>{
    let model = req.body;
    let result = await addCategory(model);
-   console.log('result from add category is : ',result);
+   // console.log('result from add category is : ',result);
    if(result){
       res.send(result);
    }
@@ -16,7 +16,7 @@ router.put("/:id",async(req,res)=>{
    let data = req.body;
    let id = req.params.id;
    let result = await updateCategory(id,data);
-   console.log('put result is : ',result);
+   // console.log('put result is : ',result);
    if(result){
       res.send(result);
    }else{
@@ -27,7 +27,7 @@ router.put("/:id",async(req,res)=>{
 
 router.delete("/:id",async(req,res)=>{
    const deletedResult = await deleteCategory(req.params.id);
-   console.log('deleted result is : ',deletedResult);
+   // console.log('deleted result is : ',deletedResult);
    if(deletedResult){
       res.status(201).send({message : 'Deleted Successfully', deletedResult})
    }else{
@@ -37,7 +37,7 @@ router.delete("/:id",async(req,res)=>{
 
 router.get("",async(req,res)=>{
    let result = await getAllCategories();
-   console.log('get category is : ',result);
+   // console.log('get category is : ',result);
    if(result){
       res.send(result);
    }

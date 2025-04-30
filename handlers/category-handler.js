@@ -1,20 +1,20 @@
 import Category from "../database/category.js";
 
 async function addCategory(model){
-    console.log('I am in add category handler !'); 
+   //  console.log('I am in add category handler !'); 
        let category = new Category({
           name : model.name
        })
        // save it in db
        await category.save();
-       console.log('add category is : ',category);
+      //  console.log('add category is : ',category);
        return category.toObject();
 }
 
 async function updateCategory(received_id,model){
        try {
           const updatedCategory = await Category.findOneAndUpdate({_id : received_id},model);
-          console.log('updated cateogry is : ',updatedCategory);
+         //  console.log('updated cateogry is : ',updatedCategory);
           return updatedCategory.toObject();
        } catch (error) {
           return error;

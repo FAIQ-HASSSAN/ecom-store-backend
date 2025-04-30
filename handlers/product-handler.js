@@ -66,4 +66,25 @@ async function getSingleProduct(id) {
     }
 }
 
-export {getAllProducts , getSingleProduct , deleteProduct , updateProduct , addProduct}
+async function getNewProducts() {
+    try {
+        const newProducts = await Product.find({
+            isNewProducts : true
+        }).lean();
+        return newProducts;
+    } catch (error) {
+        throw new error;
+    }
+}
+
+async function getFeatureProducts() {
+    try {
+        const featureProducts = await Product.find({
+            isFeatured : true
+        })
+        return featureProducts.map((featureproduct)=>featureproduct.toJSON());
+    } catch (error) {
+        throw new error;
+    }
+}
+export {getAllProducts , getSingleProduct , deleteProduct , updateProduct , addProduct , getNewProducts , getFeatureProducts}
