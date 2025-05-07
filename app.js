@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { urlencoded } from 'express'
 import mongoose from 'mongoose';
 const app = express();
 import multer from 'multer';
@@ -12,6 +12,8 @@ import categoryRoutes from './routes/category.js'
 import brandRoutes from "./routes/brand.js";
 import productRoutes from './routes/product.js';
 import customerRoutes from './routes/customer.js';
+import authRoutes from './routes/auth.js';
+import { verifyToken , isAdmin } from './middleware/auth-middleware.js';
 
 app.use(cors({
     origin : 'http://localhost:4200',
@@ -20,6 +22,7 @@ app.use(cors({
 // send data in form of json on server
 app.use(express.json());
 app.use('/uploads',express.static(path.join(__dirname,'uploads')));
+// app.use(express.urlencoded({ extended: true }));
 
 // multer setup
 const storage = multer.diskStorage({
@@ -44,10 +47,12 @@ app.get("/",(req,res)=>{
 })
 
 // ju bhi /category se ae ga hum isko categoryRoutes pr bheje ge
-app.use('/category',categoryRoutes);
-app.use('/brand',brandRoutes);
-app.use('/product',productRoutes);
-app.use('/customer',customerRoutes);
+// verfiytoken true return kre ga tu cateogory routes pr jae ga
+app.use('/category', verifyToken , isAdmin ,categoryRoutes);
+app.use('/brand', verifyToken ,brandRoutes);
+app.use('/product', verifyToken,productRoutes);
+app.use('/customer', verifyToken ,customerRoutes);
+app.use('/auth',authRoutes);
 
 async function connectDb(){
     await mongoose.connect('mongodb://localhost:27017',{
